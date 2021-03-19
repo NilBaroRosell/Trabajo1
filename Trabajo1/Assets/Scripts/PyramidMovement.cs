@@ -8,6 +8,7 @@ public class PyramidMovement : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private float velocity = 2.0f;
     [SerializeField] private float jumpForce = 10.0f;
+    [SerializeField] private float maxVelocity = 30.0f;
     private bool isJumping = false;
 
     private void Awake()
@@ -19,19 +20,20 @@ public class PyramidMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(input.GetLeft())
+        if(input.GetLeft() && !isJumping)
         {
             rb.AddForce(Vector3.right * velocity, ForceMode.Force);
         }
-        if(input.GetRight())
+        if(input.GetRight() && !isJumping)
         {
             rb.AddForce(-Vector3.right * velocity, ForceMode.Force);
         }
-        if(input.GetJump())
+        if(input.GetJump() && !isJumping)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = true;
         }
+        if (rb.velocity.magnitude > maxVelocity) rb.velocity = rb.velocity.normalized * maxVelocity;
     }
 
     private void OnCollisionEnter(Collision collision)
