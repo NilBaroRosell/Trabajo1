@@ -432,6 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ddc6119e2ca1f40b5754020d159b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 1863442629}
 --- !u!64 &23738168
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3090,7 +3091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 2
   jumpForce: 10
-  maxVelocity: 30
+  maxVelocity: 35
   start: 0
 --- !u!136 &158919824
 CapsuleCollider:
@@ -7950,6 +7951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ddc6119e2ca1f40b5754020d159b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 1863442629}
 --- !u!64 &456117888
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8841,6 +8843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ddc6119e2ca1f40b5754020d159b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 1863442629}
 --- !u!64 &544042501
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12831,7 +12834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &851099978
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13138,6 +13141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ddc6119e2ca1f40b5754020d159b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 1863442629}
 --- !u!64 &857793541
 MeshCollider:
   m_ObjectHideFlags: 0

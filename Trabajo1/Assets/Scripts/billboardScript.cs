@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class billboardScript : MonoBehaviour
 {
+    [SerializeField] private Camera camera;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,6 @@ public class billboardScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.forward = Camera.main.transform.forward;
+        transform.forward = camera.transform.forward;
     }
 }
