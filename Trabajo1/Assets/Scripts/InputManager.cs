@@ -6,6 +6,8 @@ public class InputManager : MonoBehaviour
 {
     private bool left;
     private bool right;
+    private bool forward;
+    private bool backward;
     private bool jump;
 
     private void Awake()
@@ -31,6 +33,14 @@ public class InputManager : MonoBehaviour
         {
             right = true;
         }
+        if(Input.GetKey(KeyCode.W))
+        {
+            forward = true;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            backward = true;
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jump = true;
@@ -41,6 +51,8 @@ public class InputManager : MonoBehaviour
     {
         left = false;
         right = false;
+        forward = false;
+        backward = false;
         jump = false;
     }
 
@@ -52,6 +64,16 @@ public class InputManager : MonoBehaviour
     public bool GetRight()
     {
         return right;
+    }
+
+    public bool GetForward()
+    {
+        return forward;
+    }
+
+    public bool GetBackward()
+    {
+        return backward;
     }
 
     public bool GetJump()
