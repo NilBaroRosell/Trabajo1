@@ -21,7 +21,7 @@ public class LaberinthMovement : MonoBehaviour
 
     IEnumerator shine()
     {
-        transform.GetChild(0).transform.localPosition += Vector3.up * 20;
+        transform.GetChild(0).transform.localPosition += Vector3.up * 10;
         while (light.intensity < 1)
         {
             light.intensity += 0.01f;
@@ -36,7 +36,7 @@ public class LaberinthMovement : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        transform.GetChild(0).transform.localPosition += Vector3.down * 20;
+        transform.GetChild(0).transform.localPosition += Vector3.down * 10;
 
         yield return new WaitForSeconds(10);
 
