@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pyramid
   - Eye
+  - Limit
   layers:
   - Default
   - TransparentFX

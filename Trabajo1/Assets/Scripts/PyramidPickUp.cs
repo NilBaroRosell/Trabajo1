@@ -6,6 +6,7 @@ public class PyramidPickUp : MonoBehaviour
 {
     public int score;
     private int points = 15;
+    private bool end = false;
 
     private void Awake()
     {
@@ -19,10 +20,24 @@ public class PyramidPickUp : MonoBehaviour
             AddScore();
             Destroy(other.gameObject);
         }
+        else if(other.gameObject.tag == "Limit")
+        {
+            end = true;
+        }
+    }
+
+    public bool GetEnd()
+    {
+        return end;
     }
 
     private void AddScore()
     {
         score += points;
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 }
