@@ -5,13 +5,10 @@ using UnityEngine;
 public class MuseumController : MonoBehaviour
 {
     [SerializeField] private PlayerMovementMuseum player;
+    private bool onPortal = false;
 
-    // Update is called once per frame
-    void Update()
+    public bool GetOnPortal()
     {
-        if(player.GetOnPortal())
-        {
-            Debug.Log("ON PORTAL");
-        }
+        return player.GetOnPortal();
     }
 }

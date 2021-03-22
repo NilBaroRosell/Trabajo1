@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovementMuseum : MonoBehaviour
 {
     private InputManager input;
     private bool onPortal = false;
-    [SerializeField] private float velocity = 2.0f;
+    [SerializeField] private float velocity = 4f;
     [SerializeField] private float maxVelocity = 30.0f;
     private Vector3 right;
     private Vector3 forward;
     private Rigidbody rb;
+    public Image image;
 
     // Start is called before the first frame update
     void Start()
@@ -28,20 +30,23 @@ public class PlayerMovementMuseum : MonoBehaviour
         forward.Normalize();
         if (input.GetLeft())
         {
-            rb.AddForce(-right * velocity, ForceMode.Force);
+            transform.position -= right * (velocity) * Time.deltaTime;
+            //rb.AddForce(-Vector3.right * velocity, ForceMode.Force);
         }
         if (input.GetRight())
         {
-            rb.AddForce(right * velocity, ForceMode.Force);
+            transform.position += right * (velocity) * Time.deltaTime;
+            //rb.AddForce(Vector3.right * velocity, ForceMode.Force);
         }
         if (input.GetForward())
         {
-            Debug.Log("FORWARD");
-            rb.AddForce(forward * velocity, ForceMode.Force);
+            transform.position += forward * (velocity) * Time.deltaTime;
+            //rb.AddForce(Vector3.forward * velocity, ForceMode.Force);
         }
         if (input.GetBackward())
         {
-            rb.AddForce(-forward * velocity, ForceMode.Force);
+            transform.position -= forward * (velocity) * Time.deltaTime;
+            //rb.AddForce(-Vector3.forward * velocity, ForceMode.Force);
         }
         if (rb.velocity.magnitude > maxVelocity) rb.velocity = rb.velocity.normalized * maxVelocity;
     }

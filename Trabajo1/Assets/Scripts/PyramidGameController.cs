@@ -14,6 +14,7 @@ public class PyramidGameController : MonoBehaviour
     [SerializeField] private GameObject[] players;
     [SerializeField] private GameObject Canvas;
     public int stage = 0;
+    private bool finished = false;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -86,7 +87,7 @@ public class PyramidGameController : MonoBehaviour
             }
             case 6:
             {
-                Debug.Log("Change scene");
+                finished = true;
                 break;
             }
             default: break;
@@ -177,5 +178,10 @@ public class PyramidGameController : MonoBehaviour
             Canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Blue player: 38 points";
             Canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Yellow player: 23 points";
         }
+    }
+
+    public bool GetFinished()
+    {
+        return finished;
     }
 }
