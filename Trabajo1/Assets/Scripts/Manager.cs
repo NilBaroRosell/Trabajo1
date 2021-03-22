@@ -9,7 +9,9 @@ public class Manager : MonoBehaviour
     private SceneName scene;
     private MuseumController museumController;
     private PyramidGameController pyramidController;
-    [SerializeField] private GameObject trophy;
+    private GameObject trophy;
+    private int[] points;
+
     private void Awake()
     {
         if (GameObject.FindGameObjectsWithTag("Manager").Length > 1)
@@ -23,8 +25,14 @@ public class Manager : MonoBehaviour
             {
                 museumController = GameObject.Find("MuseumController").GetComponent<MuseumController>();
             }
+            trophy = GameObject.Find("Trophy");
             trophy.SetActive(false);
             Cursor.visible = false;
+            points = new int[4];
+            for(int i = 0; i < 4; i++)
+            {
+                points[i] = 0;
+            }            
             DontDestroyOnLoad(this.gameObject);
         }
     }
@@ -47,6 +55,7 @@ public class Manager : MonoBehaviour
             {
                 if (1 == 2)
                 {
+                    //add points
                     scene = SceneName.WAITING;
                     SceneManager.LoadScene("PyramidScene", LoadSceneMode.Single);
                     StartCoroutine(WaitForPyramidLoaded());
@@ -100,6 +109,7 @@ public class Manager : MonoBehaviour
         if (GameObject.Find("PyramidGameController") != null)
         {
             pyramidController = GameObject.Find("PyramidGameController").GetComponent<PyramidGameController>();
+            pyramidController.SetPoints(points);
         }
 
         scene = SceneName.PYRAMID;
@@ -119,7 +129,13 @@ public class Manager : MonoBehaviour
             museumController = GameObject.Find("MuseumController").GetComponent<MuseumController>();
         }
 
+        trophy = GameObject.Find("Trophy");
         trophy.SetActive(true);
+
+        for (int i = 0; i < 4; i++)
+        {
+            points[i] = 0;
+        }
 
         scene = SceneName.MUSEUM;
     }

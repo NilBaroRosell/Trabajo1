@@ -15,6 +15,7 @@ public class PyramidGameController : MonoBehaviour
     [SerializeField] private GameObject Canvas;
     public int stage = 0;
     private bool finished = false;
+    private int[] points;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -28,70 +29,70 @@ public class PyramidGameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(stage)
+        switch (stage)
         {
             case 0:
-            {
-                camera1.transform.position = Vector3.Lerp(camera1.transform.position, cameraPositions.transform.GetChild(1).position, Time.deltaTime * 0.75f);
-                camera1.transform.eulerAngles = Vector3.Lerp(camera1.transform.eulerAngles, cameraPositions.transform.GetChild(1).eulerAngles, Time.deltaTime * 0.75f);
-                if (Mathf.Abs((camera1.transform.position - cameraPositions.transform.GetChild(1).position).magnitude) < 3 && Mathf.Abs((camera1.transform.eulerAngles - cameraPositions.transform.GetChild(1).eulerAngles).magnitude) < 3)
                 {
-                    stage++;
-                    movement.SetInitialPosition();
-                    players[0].transform.position += new Vector3(-44, 0, 0);
-                    players[1].transform.position += new Vector3(42, 0, 0);
-                    players[2].transform.position += new Vector3(0, 0, 42);
+                    camera1.transform.position = Vector3.Lerp(camera1.transform.position, cameraPositions.transform.GetChild(1).position, Time.deltaTime * 0.75f);
+                    camera1.transform.eulerAngles = Vector3.Lerp(camera1.transform.eulerAngles, cameraPositions.transform.GetChild(1).eulerAngles, Time.deltaTime * 0.75f);
+                    if (Mathf.Abs((camera1.transform.position - cameraPositions.transform.GetChild(1).position).magnitude) < 3 && Mathf.Abs((camera1.transform.eulerAngles - cameraPositions.transform.GetChild(1).eulerAngles).magnitude) < 3)
+                    {
+                        stage++;
+                        movement.SetInitialPosition();
+                        players[0].transform.position += new Vector3(-44, 0, 0);
+                        players[1].transform.position += new Vector3(42, 0, 0);
+                        players[2].transform.position += new Vector3(0, 0, 42);
+                    }
+                    break;
                 }
-                break;
-            }
             case 1:
-            {
-                camera1.transform.position = Vector3.Lerp(camera1.transform.position, cameraPositions.transform.GetChild(2).position, Time.deltaTime * 0.75f);
-                camera1.transform.eulerAngles = Vector3.Lerp(camera1.transform.eulerAngles, cameraPositions.transform.GetChild(2).eulerAngles, Time.deltaTime * 0.75f);
-                if (Mathf.Abs((camera1.transform.position - cameraPositions.transform.GetChild(2).position).magnitude) < 3 && Mathf.Abs((camera1.transform.eulerAngles - cameraPositions.transform.GetChild(2).eulerAngles).magnitude) < 3)
                 {
-                    Canvas.transform.GetChild(0).gameObject.SetActive(true);
-                    Canvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
-                    Canvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
-                    Canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
-                    Canvas.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
-                    Destroy(camera1);
-                    stage++;
-                    StartCoroutine(Wait3(1));
+                    camera1.transform.position = Vector3.Lerp(camera1.transform.position, cameraPositions.transform.GetChild(2).position, Time.deltaTime * 0.75f);
+                    camera1.transform.eulerAngles = Vector3.Lerp(camera1.transform.eulerAngles, cameraPositions.transform.GetChild(2).eulerAngles, Time.deltaTime * 0.75f);
+                    if (Mathf.Abs((camera1.transform.position - cameraPositions.transform.GetChild(2).position).magnitude) < 3 && Mathf.Abs((camera1.transform.eulerAngles - cameraPositions.transform.GetChild(2).eulerAngles).magnitude) < 3)
+                    {
+                        Canvas.transform.GetChild(0).gameObject.SetActive(true);
+                        Canvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                        Canvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+                        Canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+                        Canvas.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
+                        Destroy(camera1);
+                        stage++;
+                        StartCoroutine(Wait3(1));
+                    }
+                    break;
                 }
-                break;
-            }
             case 2:
-            {
-                break;
-            }
-            case 3:
-            {                    
-                if (pickUp.GetEnd())
                 {
-                    stage++;
+                    break;
                 }
-                break;
-            }
+            case 3:
+                {
+                    if (pickUp.GetEnd())
+                    {
+                        stage++;
+                    }
+                    break;
+                }
             case 4:
-            {
-                Canvas.transform.GetChild(1).gameObject.SetActive(true);
-                stage++;
-                SetPoints();
-                StartCoroutine(WaitClassification(3));
-                break;
-            }
+                {
+                    Canvas.transform.GetChild(1).gameObject.SetActive(true);
+                    stage++;
+                    SetPoints();
+                    StartCoroutine(WaitClassification(3));
+                    break;
+                }
             case 5:
-            {
-                break;
-            }
+                {
+                    break;
+                }
             case 6:
-            {
-                finished = true;
-                break;
-            }
+                {
+                    finished = true;
+                    break;
+                }
             default: break;
-        }        
+        }
     }
 
     private IEnumerator Wait3(float waitTime)
@@ -136,6 +137,7 @@ public class PyramidGameController : MonoBehaviour
 
         Canvas.transform.GetChild(1).gameObject.SetActive(false);
         Canvas.transform.GetChild(2).gameObject.SetActive(true);
+        SetFinalPoints();
         StartCoroutine(WaitExpedition(3));
     }
 
@@ -150,38 +152,135 @@ public class PyramidGameController : MonoBehaviour
     private void SetPoints()
     {
         int score = pickUp.GetScore();
-        if(score < 15)
+        if (score < 15)
         {
-            Canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Yellow player: 50 points";
+            Canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Pink player: 50 points";
             Canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Blue player: 35 points";
             Canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Green player: 22 points";
             Canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
+            points[0] += 2;
+            points[1] += 4;
+            points[2] += 6;
+            points[3] += 8;
         }
         else if (score < 30)
         {
             Canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Blue player: 55 points";
-            Canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Yellow player: 47 points";
+            Canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Pink player: 47 points";
             Canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
             Canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Green player: 13 points";
+            points[0] += 4;
+            points[1] += 2;
+            points[2] += 8;
+            points[3] += 6;
         }
         else if (score < 45)
         {
             Canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Green player: 50 points";
             Canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
-            Canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Yellow player: 26 points";
+            Canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Pink player: 26 points";
             Canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Blue player: 15 points";
+            points[0] += 6;
+            points[1] += 8;
+            points[2] += 2;
+            points[3] += 4;
         }
         else
         {
             Canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
             Canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Green player: 40 points";
             Canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Blue player: 38 points";
-            Canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Yellow player: 23 points";
+            Canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Pink player: 23 points";
+            points[0] += 8;
+            points[1] += 6;
+            points[2] += 4;
+            points[3] += 2;
         }
+    }
+
+    private void SetFinalPoints()
+    {
+        int[] aux = new int[4];
+        int[] aux2 = new int[4];
+
+        for(int i = 0; i < 4; i ++)
+        {
+            if(points[i] > aux2[0])
+            {
+                aux2[3] = aux2[2];
+                aux2[2] = aux2[1];
+                aux2[1] = aux2[0];
+                aux2[0] = points[i];
+                aux[3] = aux[2];
+                aux[2] = aux[1];
+                aux[1] = aux[0];
+                aux[0] = i;
+            }
+            else if(points[i] > aux2[1])
+            {
+                aux2[3] = aux2[2];
+                aux2[2] = aux2[1];
+                aux2[1] = points[i];
+                aux[3] = aux[2];
+                aux[2] = aux[1];
+                aux[1] = i;
+            }
+            else if(points[i] > aux2[2])
+            {
+                aux2[3] = aux2[2];
+                aux2[2] = points[i];
+                aux[3] = aux[2];
+                aux[2] = i;
+            }
+            else if(points[i] > aux2[3])
+            {
+                aux2[3] = points[i];
+                aux[3] = i;
+            }
+        }
+
+        string[] names = new string[4];
+
+        for(int i = 0; i < 4; i++)
+        {
+            switch(aux[i])
+            {
+                case 0:
+                {
+                    names[i] = "Red";
+                    break;
+                }
+                case 1:
+                {
+                    names[i] = "Green";
+                    break;
+                }
+                case 2:
+                {
+                    names[i] = "Blue";
+                    break;
+                }
+                case 3:
+                {
+                    names[i] = "Pink";
+                    break;
+                }
+            }
+        }
+        
+        Canvas.transform.GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().text = names[0] + " player: " + points[aux[0]] + " points";
+        Canvas.transform.GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>().text = names[1] + " player: " + points[aux[1]] + " points";
+        Canvas.transform.GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>().text = names[2] + " player: " + points[aux[2]] + " points";
+        Canvas.transform.GetChild(2).GetChild(5).GetComponent<TextMeshProUGUI>().text = names[3] + " player: " + points[aux[3]] + " points";
     }
 
     public bool GetFinished()
     {
         return finished;
     }
+
+    public void SetPoints (int[] _points)
+    {
+        points = _points;
+    }   
 }
