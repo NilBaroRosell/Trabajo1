@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
-    //public Manager instance;
     private enum SceneName { MUSEUM, LABARINTH, PYRAMID, WAITING };
     private SceneName scene;
     private MuseumController museumController;
@@ -96,7 +95,7 @@ public class Manager : MonoBehaviour
             yield return null;
         }
 
-        museumController = null;
+        //museumController = null;
 
         if (GameObject.Find("PyramidGameController") != null)
         {
