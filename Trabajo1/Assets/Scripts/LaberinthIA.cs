@@ -22,7 +22,7 @@ public class LaberinthIA : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.Normalize(points[idx] - transform.position) / 35;
+        transform.position += Vector3.Normalize(points[idx] - transform.position) / 20;
         if (Vector3.Distance(transform.position, points[idx]) < 0.5f && idx < points.Length) idx++;
         GameObject.Find("Red").GetComponent<LaberinthMovement>().hasFinished(transform);
     }

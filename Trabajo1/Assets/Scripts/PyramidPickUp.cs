@@ -5,7 +5,7 @@ using UnityEngine;
 public class PyramidPickUp : MonoBehaviour
 {
     public int score;
-    private int points = 15;
+    private int points = 5;
     private bool end = false;
 
     private void Awake()
