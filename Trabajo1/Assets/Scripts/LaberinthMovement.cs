@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LaberinthMovement : MonoBehaviour
@@ -10,12 +11,14 @@ public class LaberinthMovement : MonoBehaviour
     public int[] points;
     bool finished = false;
     public bool gameOver = false;
+    [SerializeField] private GameObject canvas;
 
     // Start is called before the first frame update
     void Start()
     {
         ranking = new List<KeyValuePair<int, string>>();
         points = new int[4];
+        canvas.transform.GetChild(0).gameObject.SetActive(false);
         StartCoroutine(shine());
     }
 
@@ -81,6 +84,15 @@ public class LaberinthMovement : MonoBehaviour
         points[1] = ranking.Find(x => x.Value == "Green").Key;
         points[2] = ranking.Find(x => x.Value == "Blue").Key;
         points[3] = ranking.Find(x => x.Value == "Pink").Key;
+
+        canvas.transform.GetChild(0).gameObject.SetActive(true);
+
+        canvas.transform.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>().text = ranking[0].Value + " player: " + ranking[0].Key + " points";
+        canvas.transform.GetChild(0).GetChild(3).GetComponent<TextMeshProUGUI>().text = ranking[1].Value + " player: " + ranking[1].Key + " points";
+        canvas.transform.GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>().text = ranking[2].Value + " player: " + ranking[2].Key + " points";
+        canvas.transform.GetChild(0).GetChild(5).GetComponent<TextMeshProUGUI>().text = ranking[3].Value + " player: " + ranking[3].Key + " points";
+
+        ranking.Clear();
 
         Invoke("EndOfTheGame", 10.0f);
     }

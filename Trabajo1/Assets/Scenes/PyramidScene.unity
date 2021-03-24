@@ -17083,7 +17083,7 @@ MonoBehaviour:
   - {fileID: 1716190947}
   - {fileID: 1547632583}
   - {fileID: 678880636}
-  Canvas: {fileID: 1426621489}
+  canvas: {fileID: 1426621489}
   stage: 0
 --- !u!4 &1086680848
 Transform:
