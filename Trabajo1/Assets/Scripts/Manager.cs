@@ -48,7 +48,7 @@ public class Manager : MonoBehaviour
                 {
                     scene = SceneName.WAITING;
                     SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
-                    StartCoroutine(WaitForLabarinthLoaded());
+                    StartCoroutine(WaitForLaberinthLoaded());
                 }
                 break;
             }
@@ -81,7 +81,7 @@ public class Manager : MonoBehaviour
         }
     }
 
-    public IEnumerator WaitForLabarinthLoaded()
+    public IEnumerator WaitForLaberinthLoaded()
     {
         while (!SceneManager.GetSceneByName("SampleScene").isLoaded)
         {
@@ -105,7 +105,7 @@ public class Manager : MonoBehaviour
             yield return null;
         }
 
-        //museumController = null;
+        laberinthMovement = null;
 
         if (GameObject.Find("PyramidGameController") != null)
         {

@@ -7,7 +7,7 @@ public class PlayerMovementMuseum : MonoBehaviour
 {
     private InputManager input;
     private bool onPortal = false;
-    [SerializeField] private float velocity = 4f;
+    [SerializeField] private float velocity = 3f;
     [SerializeField] private float maxVelocity = 30.0f;
     private Vector3 right;
     private Vector3 forward;

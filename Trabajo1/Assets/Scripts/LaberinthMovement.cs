@@ -65,7 +65,7 @@ public class LaberinthMovement : MonoBehaviour
     {
        if(_player.position.x > 92)
         {
-            ranking.Add(new KeyValuePair<int, string>(10 - ranking.Count * 3, _player.name));
+            ranking.Add(new KeyValuePair<int, string>(60 - (ranking.Count * 15 ), _player.name));
             Debug.Log(ranking[ranking.Count - 1]);
             if (_player != transform)
             {

@@ -154,47 +154,51 @@ public class PyramidGameController : MonoBehaviour
         int score = pickUp.GetScore();
         if (score < 15)
         {
-            canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Pink player: 50 points";
-            canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Blue player: 35 points";
-            canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Green player: 22 points";
-            canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
-            points[0] += 2;
-            points[1] += 4;
-            points[2] += 6;
-            points[3] += 8;
+            points[0] += 30;
+            points[1] += 60;
+            points[2] += 90;
+            points[3] += 120;
+
+            canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Pink player: 120 points";
+            canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Blue player: 90 points";
+            canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Green player: 60 points";
+            canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Red player: 30 points";
         }
         else if (score < 30)
         {
-            canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Blue player: 55 points";
-            canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Pink player: 47 points";
-            canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
-            canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Green player: 13 points";
-            points[0] += 4;
-            points[1] += 2;
-            points[2] += 8;
-            points[3] += 6;
+            points[0] += 60;
+            points[1] += 30;
+            points[2] += 120;
+            points[3] += 90;
+
+            canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Blue player: 120 points";
+            canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Pink player: 90 points";
+            canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Red player: 60 points";
+            canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Green player: 30 points";
         }
         else if (score < 45)
         {
-            canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Green player: 50 points";
-            canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
-            canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Pink player: 26 points";
-            canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Blue player: 15 points";
-            points[0] += 6;
-            points[1] += 8;
-            points[2] += 2;
-            points[3] += 4;
+            points[0] += 90;
+            points[1] += 120;
+            points[2] += 30;
+            points[3] += 60;
+
+            canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Green player: 120 points";
+            canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Red player: 90 points";
+            canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Pink player: 60 points";
+            canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Blue player: 30 points";
         }
         else
         {
-            canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
-            canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Green player: 40 points";
-            canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Blue player: 38 points";
-            canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Pink player: 23 points";
-            points[0] += 8;
-            points[1] += 6;
-            points[2] += 4;
-            points[3] += 2;
+            points[0] += 120;
+            points[1] += 90;
+            points[2] += 60;
+            points[3] += 30;
+
+            canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Red player: 120 points";
+            canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Green player: 90 points";
+            canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Blue player: 60 points";
+            canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Pink player: 30 points";
         }
     }
 
