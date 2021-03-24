@@ -9,6 +9,7 @@ public class Manager : MonoBehaviour
     private SceneName scene;
     private MuseumController museumController;
     private PyramidGameController pyramidController;
+    private LaberinthMovement laberinthMovement;
     private GameObject trophy;
     private int[] points;
 
@@ -53,9 +54,9 @@ public class Manager : MonoBehaviour
             }
             case SceneName.LABARINTH:
             {
-                if (1 == 2)
+                if (laberinthMovement.gameOver)
                 {
-                    //add points
+                    points = laberinthMovement.points;
                     scene = SceneName.WAITING;
                     SceneManager.LoadScene("PyramidScene", LoadSceneMode.Single);
                     StartCoroutine(WaitForPyramidLoaded());
@@ -89,10 +90,10 @@ public class Manager : MonoBehaviour
 
         museumController = null;
 
-        /*if (GameObject.Find("PyramidGameController") != null)
+        if (GameObject.Find("Red") != null)
         {
-            pyramidController = GameObject.Find("PyramidGameController").GetComponent<PyramidGameController>();
-        }*/
+            laberinthMovement = GameObject.Find("Red").GetComponent<LaberinthMovement>();
+        }
 
         scene = SceneName.LABARINTH;
     }

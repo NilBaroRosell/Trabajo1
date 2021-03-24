@@ -12,7 +12,7 @@ public class PyramidGameController : MonoBehaviour
     [SerializeField] private Camera camera1;
     [SerializeField] private Camera camera2;
     [SerializeField] private GameObject[] players;
-    [SerializeField] private GameObject Canvas;
+    [SerializeField] private GameObject canvas;
     public int stage = 0;
     private bool finished = false;
     private int[] points;
@@ -21,9 +21,9 @@ public class PyramidGameController : MonoBehaviour
     {
         camera1.transform.position = cameraPositions.transform.GetChild(0).transform.position;
         camera1.transform.rotation = cameraPositions.transform.GetChild(0).transform.rotation;
-        Canvas.transform.GetChild(0).gameObject.SetActive(false);
-        Canvas.transform.GetChild(1).gameObject.SetActive(false);
-        Canvas.transform.GetChild(2).gameObject.SetActive(false);
+        canvas.transform.GetChild(0).gameObject.SetActive(false);
+        canvas.transform.GetChild(1).gameObject.SetActive(false);
+        canvas.transform.GetChild(2).gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -51,11 +51,11 @@ public class PyramidGameController : MonoBehaviour
                     camera1.transform.eulerAngles = Vector3.Lerp(camera1.transform.eulerAngles, cameraPositions.transform.GetChild(2).eulerAngles, Time.deltaTime * 0.75f);
                     if (Mathf.Abs((camera1.transform.position - cameraPositions.transform.GetChild(2).position).magnitude) < 3 && Mathf.Abs((camera1.transform.eulerAngles - cameraPositions.transform.GetChild(2).eulerAngles).magnitude) < 3)
                     {
-                        Canvas.transform.GetChild(0).gameObject.SetActive(true);
-                        Canvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
-                        Canvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
-                        Canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
-                        Canvas.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
+                        canvas.transform.GetChild(0).gameObject.SetActive(true);
+                        canvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                        canvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+                        canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+                        canvas.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
                         Destroy(camera1);
                         stage++;
                         StartCoroutine(Wait3(1));
@@ -76,7 +76,7 @@ public class PyramidGameController : MonoBehaviour
                 }
             case 4:
                 {
-                    Canvas.transform.GetChild(1).gameObject.SetActive(true);
+                    canvas.transform.GetChild(1).gameObject.SetActive(true);
                     stage++;
                     SetPoints();
                     StartCoroutine(WaitClassification(3));
@@ -99,8 +99,8 @@ public class PyramidGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
 
-        Canvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-        Canvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+        canvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        canvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
         StartCoroutine(Wait2(1));
     }
 
@@ -108,8 +108,8 @@ public class PyramidGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
 
-        Canvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
-        Canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
+        canvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+        canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
         StartCoroutine(Wait1(1));
     }
 
@@ -117,8 +117,8 @@ public class PyramidGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
 
-        Canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
-        Canvas.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
+        canvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        canvas.transform.GetChild(0).GetChild(3).gameObject.SetActive(true);
         StartCoroutine(WaitGo(1));
     }
 
@@ -126,7 +126,7 @@ public class PyramidGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
 
-        Canvas.transform.GetChild(0).gameObject.SetActive(false);
+        canvas.transform.GetChild(0).gameObject.SetActive(false);
         movement.SetStart(true);
         stage++;
     }
@@ -135,8 +135,8 @@ public class PyramidGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
 
-        Canvas.transform.GetChild(1).gameObject.SetActive(false);
-        Canvas.transform.GetChild(2).gameObject.SetActive(true);
+        canvas.transform.GetChild(1).gameObject.SetActive(false);
+        canvas.transform.GetChild(2).gameObject.SetActive(true);
         SetFinalPoints();
         StartCoroutine(WaitExpedition(3));
     }
@@ -145,7 +145,7 @@ public class PyramidGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
 
-        Canvas.transform.GetChild(2).gameObject.SetActive(false);
+        canvas.transform.GetChild(2).gameObject.SetActive(false);
         stage++;
     }
 
@@ -154,10 +154,10 @@ public class PyramidGameController : MonoBehaviour
         int score = pickUp.GetScore();
         if (score < 15)
         {
-            Canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Pink player: 50 points";
-            Canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Blue player: 35 points";
-            Canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Green player: 22 points";
-            Canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
+            canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Pink player: 50 points";
+            canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Blue player: 35 points";
+            canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Green player: 22 points";
+            canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
             points[0] += 2;
             points[1] += 4;
             points[2] += 6;
@@ -165,10 +165,10 @@ public class PyramidGameController : MonoBehaviour
         }
         else if (score < 30)
         {
-            Canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Blue player: 55 points";
-            Canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Pink player: 47 points";
-            Canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
-            Canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Green player: 13 points";
+            canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Blue player: 55 points";
+            canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Pink player: 47 points";
+            canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
+            canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Green player: 13 points";
             points[0] += 4;
             points[1] += 2;
             points[2] += 8;
@@ -176,10 +176,10 @@ public class PyramidGameController : MonoBehaviour
         }
         else if (score < 45)
         {
-            Canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Green player: 50 points";
-            Canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
-            Canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Pink player: 26 points";
-            Canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Blue player: 15 points";
+            canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Green player: 50 points";
+            canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
+            canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Pink player: 26 points";
+            canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Blue player: 15 points";
             points[0] += 6;
             points[1] += 8;
             points[2] += 2;
@@ -187,10 +187,10 @@ public class PyramidGameController : MonoBehaviour
         }
         else
         {
-            Canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
-            Canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Green player: 40 points";
-            Canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Blue player: 38 points";
-            Canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Pink player: 23 points";
+            canvas.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = "Red player: " + score + " points";
+            canvas.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = "Green player: 40 points";
+            canvas.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>().text = "Blue player: 38 points";
+            canvas.transform.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>().text = "Pink player: 23 points";
             points[0] += 8;
             points[1] += 6;
             points[2] += 4;
@@ -268,10 +268,10 @@ public class PyramidGameController : MonoBehaviour
             }
         }
         
-        Canvas.transform.GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().text = names[0] + " player: " + points[aux[0]] + " points";
-        Canvas.transform.GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>().text = names[1] + " player: " + points[aux[1]] + " points";
-        Canvas.transform.GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>().text = names[2] + " player: " + points[aux[2]] + " points";
-        Canvas.transform.GetChild(2).GetChild(5).GetComponent<TextMeshProUGUI>().text = names[3] + " player: " + points[aux[3]] + " points";
+        canvas.transform.GetChild(2).GetChild(2).GetComponent<TextMeshProUGUI>().text = names[0] + " player: " + points[aux[0]] + " points";
+        canvas.transform.GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>().text = names[1] + " player: " + points[aux[1]] + " points";
+        canvas.transform.GetChild(2).GetChild(4).GetComponent<TextMeshProUGUI>().text = names[2] + " player: " + points[aux[2]] + " points";
+        canvas.transform.GetChild(2).GetChild(5).GetComponent<TextMeshProUGUI>().text = names[3] + " player: " + points[aux[3]] + " points";
     }
 
     public bool GetFinished()
